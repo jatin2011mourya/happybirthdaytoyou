@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Slides</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url("images/bg.jpg") center/cover no-repeat;
+  }
+
+  .slider {
+    width: 400px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill the entire slide */
+    border-radius: 15px 15px 0 0; /* optional rounded corners on top */
+  }
+
+  .slide p {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    margin: 0;
+  }
+
+  .slide.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .controls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    background: #ff3e8d;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255,62,141,0.4);
+  }
+</style>
+</head>
+<body>
+<div class="slider">
+  <div class="slide active">
+    <img src="images/page1.jpg" alt="Page 1">
+    <p>Happy moments start here ✨</p>
+  </div>
+  <div class="slide">
+    <img src="images/page2.jpg" alt="Page 2">
+    <p>Every memory is a treasure 💖</p>
+  </div>
+  <div class="slide">
+    <img src="images/page3.jpg" alt="Page 3">
+    <p>Wishing you endless happiness 🎉</p>
+  </div>
+
+  <div class="controls">
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+document.getElementById('next').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current - 1 + slides.length) % slides.length;
+  slides[current].classList.add('active');
+});
+</script>
+</body>
+</html>
+ 
